@@ -1,8 +1,8 @@
 {
-  "name": "electron-based-interface-for-tozan-forge",
-  "productName": "electron-based-interface-for-tozan-forge",
+  "name": "electron-based-interface-for-tozan",
+  "productName": "electron-based-interface-for-tozan",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "Electron based interface for tozan",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
@@ -11,7 +11,10 @@
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\""
   },
-  "keywords": [],
+  "keywords": [
+    "tozan",
+    "duplicates"
+  ],
   "author": "paazmaya",
   "license": "MIT",
   "config": {
@@ -32,7 +35,7 @@
         "packageManager": "yarn"
       },
       "electronWinstallerConfig": {
-        "name": "electron_based_interface_for_tozan_forge"
+        "name": "electron_based_interface_for_tozan"
       },
       "electronInstallerDebian": {},
       "electronInstallerRedhat": {},
@@ -42,7 +45,7 @@
       },
       "windowsStoreConfig": {
         "packageName": "",
-        "name": "electronbasedinterfacefortozanforge"
+        "name": "electronbasedinterfacefortozan"
       }
     }
   },
