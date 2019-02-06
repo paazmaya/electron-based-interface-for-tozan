@@ -3,6 +3,20 @@
   <head>
     <meta charset="utf-8">
     <title>Electron based interface for tozan</title>
+    <style>
+    table {
+      width: 100%;
+    }
+    .filepath {
+      background-color: lightgreen;
+    }
+    .hash {
+      background-color: silver;
+    }
+    .filesize {
+      background-color: lightblue;
+    }
+    </style>
   </head>
   <body>
     <div id="app"></div>
@@ -17,8 +31,6 @@
   import {ipcRenderer} from 'electron';
 
   ipcRenderer.on('rows', (event, rows) => {
-    console.log('These rows coming from the page');
-    console.log('rows.length', rows.length);
     app.rows = rows;
   });
 

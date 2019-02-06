@@ -2,12 +2,14 @@
   <table>
     <thead>
       <th>filepath</th>
+      <th>hash</th>
       <th>filesize</th>
     </thead>
     <tbody>
       <tr v-for="row in rows">
-        <td>{{ row.filepath }}</td>
-        <td>{{ row.filesize }}</td>
+        <td class="filepath">{{ row.filepath }}</td>
+        <td class="hash">{{ row.hash }}</td>
+        <td class="filesize">{{ row.filesize }}</td>
       </tr>
     </tbody>
   </table>

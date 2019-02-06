@@ -18,7 +18,9 @@ const SELECT_DUPLICATES = `
   GROUP BY
    hash
   HAVING
-    COUNT(hash) > 1;
+    COUNT(hash) > 1
+  ORDER BY
+    hash, filepath;
   `;
 
 if (isDevMode) enableLiveReload();
