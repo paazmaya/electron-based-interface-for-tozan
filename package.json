@@ -54,13 +54,13 @@
     "electron-compile": "^6.4.4",
     "electron-devtools-installer": "^2.2.4",
     "electron-squirrel-startup": "^1.0.0",
-    "vue": "^2.6.2"
+    "vue": "^2.6.10"
   },
   "devDependencies": {
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "electron-forge": "^5.2.4",
-    "electron-prebuilt-compile": "3.0.10"
+    "electron-prebuilt-compile": "4.0.0"
   }
 }
