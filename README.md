@@ -5,3 +5,5 @@ npx electron-forge start
 ```
 
 ## License
+
+MIT
