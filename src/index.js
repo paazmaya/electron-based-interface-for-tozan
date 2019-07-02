@@ -16,7 +16,7 @@ const SELECT_DUPLICATES = `
   FROM
     files
   GROUP BY
-   hash
+    hash
   HAVING
     COUNT(hash) > 1
   ORDER BY
@@ -50,22 +50,8 @@ const createWindow = async () => {
   });
 
 
-  dialog.showOpenDialog(mainWindow, {
-    title: 'Select SQLite file',
-    filter: {
-      name: 'All Files',
-      extensions: ['*']
-    },
-    properties: ['openFile']
-  }, (filePaths) => {
-    console.log(filePaths);
-    db = new Better3(filePaths[0]);
-    const stmt = db.prepare(SELECT_DUPLICATES);
-    const rows = stmt.all();
-    console.log('rows:', rows.length);
-    mainWindow.webContents.send('rows', rows);
-  });
 };
+
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -89,26 +75,51 @@ app.on('activate', () => {
   }
 });
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.
-
 const template = [
-  {
-    label: 'Edit',
-    submenu: [
-      {role: 'undo'}
-    ]
-  }
-];
-
-if (process.platform === 'darwin') {
-  template.unshift({
+  // { role: 'appMenu' }
+  ...(process.platform === 'darwin' ? [{
     label: app.getName(),
     submenu: [
-      {role: 'about'}
+      { role: 'about' },
+      { role: 'quit' }
     ]
-  });
-}
+  }] : []),
+  // { role: 'fileMenu' }
+  {
+    label: 'File',
+    submenu: [
+      { label: 'open database', click: () => {
+
+          dialog.showOpenDialog(mainWindow, {
+            title: 'Select SQLite file',
+            filter: {
+              name: 'All Files',
+              extensions: ['*']
+            },
+            properties: ['openFile']
+          }, (filePaths) => {
+            console.log(filePaths);
+            db = new Better3(filePaths[0]);
+            const stmt = db.prepare(SELECT_DUPLICATES);
+            const rows = stmt.all();
+            console.log('rows:', rows.length);
+            mainWindow.webContents.send('rows', rows);
+         });
+        }
+      },
+      process.platform === 'darwin' ? { role: 'close' } : { role: 'quit' }
+    ]
+  },
+  {
+    role: 'help',
+    submenu: [
+      {
+        label: 'Learn More',
+        click () { require('electron').shell.openExternalSync('https://github.com/paazmaya/tozan') }
+      }
+    ]
+  }
+]
 
 const menu = Menu.buildFromTemplate(template);
 Menu.setApplicationMenu(menu);

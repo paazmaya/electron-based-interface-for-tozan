@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <title>Electron based interface for tozan</title>
@@ -16,24 +16,50 @@
     .filesize {
       background-color: lightblue;
     }
+    .modified {
+      background-color: yellow;
+    }
     </style>
   </head>
   <body>
-    <div id="app"></div>
+
+    <table>
+			<thead>
+				<th>filepath</th>
+				<th>hash</th>
+        <th>filesize</th>
+        <th>modified</th>
+			</thead>
+			<tbody id="table-body">
+			</tbody>
+		</table>
+
+    <script>
+      const tableBody = document.getElementById('table-body');
+      //const shadowRoot = tableBody.attachShadow({mode: 'open'});
+
+      const insertRow = (row) => {
+        return `
+          <tr>
+            <td class="filepath">${ row.filepath }</td>
+            <td class="hash">${ row.hash }</td>
+            <td class="filesize">${ row.filesize }</td>
+            <td class="modified">${ row.modified }</td>
+          </tr>
+        `;
+      };
+
+
+			import {ipcRenderer} from 'electron';
+
+			ipcRenderer.on('rows', (event, rows) => {
+        const items = [];
+				rows.forEach((item) => {
+          items.push(insertRow(item));
+        });
+        tableBody.innerHTML = items.join('');
+			});
+		</script>
+
   </body>
-
-  <script>
-  import Vue from 'vue';
-  import Test from './test';
-
-  const app = new Vue(Test).$mount('#app');
-
-  import {ipcRenderer} from 'electron';
-
-  ipcRenderer.on('rows', (event, rows) => {
-    app.rows = rows;
-  });
-
-  app.text = "Electron Forge with Vue.js!";
-  </script>
 </html>
