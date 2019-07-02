@@ -1,4 +1,4 @@
-import { app, BrowserWindow, dialog, Menu } from 'electron';
+import { app, BrowserWindow, dialog, Menu, shell } from 'electron';
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer';
 import { enableLiveReload } from 'electron-compile';
 
@@ -9,6 +9,7 @@ import Better3 from 'better-sqlite3';
 let mainWindow, db;
 
 const isDevMode = process.execPath.match(/[\\/]electron/);
+const isMac = process.platform === 'darwin';
 
 const SELECT_DUPLICATES = `
   SELECT
@@ -21,15 +22,17 @@ const SELECT_DUPLICATES = `
     COUNT(hash) > 1
   ORDER BY
     hash, filepath;
-  `;
+`;
 
-if (isDevMode) enableLiveReload();
+if (isDevMode) {
+  enableLiveReload();
+}
 
 const createWindow = async () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1000,
+    height: 700,
   });
 
   // and load the index.html of the app.
@@ -62,7 +65,7 @@ app.on('ready', createWindow);
 app.on('window-all-closed', () => {
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== 'darwin') {
+  if (!isMac) {
     app.quit();
   }
 });
@@ -77,7 +80,7 @@ app.on('activate', () => {
 
 const template = [
   // { role: 'appMenu' }
-  ...(process.platform === 'darwin' ? [{
+  ...(isMac ? [{
     label: app.getName(),
     submenu: [
       { role: 'about' },
@@ -88,13 +91,15 @@ const template = [
   {
     label: 'File',
     submenu: [
-      { label: 'open database', click: () => {
+      {
+        label: 'Open database',
+        click: () => {
 
           dialog.showOpenDialog(mainWindow, {
             title: 'Select SQLite file',
             filter: {
               name: 'All Files',
-              extensions: ['*']
+              extensions: ['sqlite']
             },
             properties: ['openFile']
           }, (filePaths) => {
@@ -104,10 +109,10 @@ const template = [
             const rows = stmt.all();
             console.log('rows:', rows.length);
             mainWindow.webContents.send('rows', rows);
-         });
+          });
         }
       },
-      process.platform === 'darwin' ? { role: 'close' } : { role: 'quit' }
+      isMac ? { role: 'close' } : { role: 'quit' }
     ]
   },
   {
@@ -115,7 +120,9 @@ const template = [
     submenu: [
       {
         label: 'Learn More',
-        click () { require('electron').shell.openExternalSync('https://github.com/paazmaya/tozan') }
+        click: () => {
+          shell.openExternalSync('https://github.com/paazmaya/tozan')
+        }
       }
     ]
   }

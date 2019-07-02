@@ -38,13 +38,18 @@
       const tableBody = document.getElementById('table-body');
       //const shadowRoot = tableBody.attachShadow({mode: 'open'});
 
+      const convertDate = (timestamp) => {
+        const date = new Date(timestamp);
+        return date.toISOString().replace('T', ' ').replace(/\.\d+Z?$/, '');
+      };
+
       const insertRow = (row) => {
         return `
           <tr>
             <td class="filepath">${ row.filepath }</td>
             <td class="hash">${ row.hash }</td>
             <td class="filesize">${ row.filesize }</td>
-            <td class="modified">${ row.modified }</td>
+            <td class="modified">${ convertDate(row.modified) }</td>
           </tr>
         `;
       };
