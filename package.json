@@ -3,62 +3,57 @@
   "productName": "electron-based-interface-for-tozan",
   "version": "0.1.0",
   "description": "Electron based interface for tozan",
-  "main": "src/index.js",
+  "main": ".webpack/main",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\""
+    "lint": "electron-forge lint"
   },
   "keywords": [
     "tozan",
     "duplicates"
   ],
-  "author": "paazmaya",
+  "author": {
+    "name": "Juga Paazmaya",
+    "email": "paazmaya@yahoo.com"
+  },
+  "engines": {
+    "node": ">=16.13.0",
+    "npm": ">=8.1.0"
+  },
   "license": "MIT",
   "config": {
-    "forge": {
-      "make_targets": {
-        "win32": [
-          "squirrel"
-        ],
-        "darwin": [
-          "zip"
-        ],
-        "linux": [
-          "deb",
-          "rpm"
-        ]
-      },
-      "electronPackagerConfig": {
-        "packageManager": "npm"
-      },
-      "electronWinstallerConfig": {
-        "name": "electron_based_interface_for_tozan"
-      },
-      "electronInstallerDebian": {},
-      "electronInstallerRedhat": {},
-      "github_repository": {
-        "owner": "",
-        "name": ""
-      },
-      "windowsStoreConfig": {
-        "packageName": "",
-        "name": "electronbasedinterfacefortozan"
-      }
-    }
-  },
-  "dependencies": {
-    "better-sqlite3": "^5.4.3",
-    "electron-compile": "^6.4.4",
-    "electron-devtools-installer": "^2.2.4",
-    "electron-squirrel-startup": "^1.0.0"
+    "forge": "forge.config.js"
   },
   "devDependencies": {
-    "babel-plugin-transform-async-to-generator": "^6.24.1",
-    "babel-preset-env": "^1.7.0",
-    "electron-forge": "^5.2.4",
-    "electron-prebuilt-compile": "4.0.0"
+    "@babel/core": "^7.17.9",
+    "@babel/preset-react": "^7.16.7",
+    "@chakra-ui/icons": "^1.1.7",
+    "@chakra-ui/react": "^1.8.8",
+    "@electron-forge/cli": "^6.0.0-beta.63",
+    "@electron-forge/maker-deb": "^6.0.0-beta.63",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.63",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
+    "@electron-forge/maker-zip": "^6.0.0-beta.63",
+    "@electron-forge/plugin-webpack": "6.0.0-beta.63",
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@vercel/webpack-asset-relocator-loader": "1.7.0",
+    "babel-loader": "^8.2.5",
+    "css-loader": "^6.0.0",
+    "electron": "18.0.4",
+    "framer-motion": "^6.3.0",
+    "node-loader": "^2.0.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-hot-loader": "^4.13.0",
+    "react-table": "^7.7.0",
+    "style-loader": "^3.0.0"
+  },
+  "dependencies": {
+    "better-sqlite3": "^7.5.1",
+    "electron-squirrel-startup": "^1.0.0"
   }
 }

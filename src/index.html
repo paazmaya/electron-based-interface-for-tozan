@@ -1,70 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <title>Electron based interface for tozan</title>
-    <style>
-    table {
-      width: 100%;
-    }
-    .filepath {
-      background-color: lightgreen;
-    }
-    .hash {
-      background-color: silver;
-    }
-    .filesize {
-      background-color: lightblue;
-    }
-    .modified {
-      background-color: yellow;
-    }
-    </style>
+    <meta charset="UTF-8" />
+    <title>tozan - File hash table</title>
+
   </head>
   <body>
-
-    <table>
-			<thead>
-				<th>filepath</th>
-				<th>hash</th>
-        <th>filesize</th>
-        <th>modified</th>
-			</thead>
-			<tbody id="table-body">
-			</tbody>
-		</table>
-
-    <script>
-      const tableBody = document.getElementById('table-body');
-      //const shadowRoot = tableBody.attachShadow({mode: 'open'});
-
-      const convertDate = (timestamp) => {
-        const date = new Date(timestamp);
-        return date.toISOString().replace('T', ' ').replace(/\.\d+Z?$/, '');
-      };
-
-      const insertRow = (row) => {
-        return `
-          <tr>
-            <td class="filepath">${ row.filepath }</td>
-            <td class="hash">${ row.hash }</td>
-            <td class="filesize">${ row.filesize }</td>
-            <td class="modified">${ convertDate(row.modified) }</td>
-          </tr>
-        `;
-      };
-
-
-			import {ipcRenderer} from 'electron';
-
-			ipcRenderer.on('rows', (event, rows) => {
-        const items = [];
-				rows.forEach((item) => {
-          items.push(insertRow(item));
-        });
-        tableBody.innerHTML = items.join('');
-			});
-		</script>
-
+    <div id="root"></div>
   </body>
 </html>
