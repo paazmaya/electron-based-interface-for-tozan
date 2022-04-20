@@ -4,7 +4,7 @@ module.exports = {
     {
       name: '@electron-forge/maker-squirrel',
       config: {
-        name: 'electron_based_interface_for_tozan_forge_2022_04_20_webpack',
+        name: 'electron_based_interface_for_tozan',
       },
     },
     {
