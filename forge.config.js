@@ -1,48 +1,46 @@
 module.exports = {
-  "packagerConfig": {},
-  "makers": [
+  packagerConfig: {},
+  makers: [
     {
-      "name": "@electron-forge/maker-squirrel",
-      "config": {
-        "name": "electron_based_interface_for_tozan_forge_2022_04_20_webpack"
-      }
+      name: '@electron-forge/maker-squirrel',
+      config: {
+        name: 'electron_based_interface_for_tozan_forge_2022_04_20_webpack',
+      },
     },
     {
-      "name": "@electron-forge/maker-zip",
-      "platforms": [
-        "darwin"
-      ]
+      name: '@electron-forge/maker-zip',
+      platforms: ['darwin'],
     },
     {
-      "name": "@electron-forge/maker-deb",
-      "config": {}
+      name: '@electron-forge/maker-deb',
+      config: {},
     },
     {
-      "name": "@electron-forge/maker-rpm",
-      "config": {}
-    }
+      name: '@electron-forge/maker-rpm',
+      config: {},
+    },
   ],
-  "plugins": [
+  plugins: [
     [
-      "@electron-forge/plugin-webpack",
+      '@electron-forge/plugin-webpack',
       {
-        "mainConfig": "./webpack.main.config.js",
-        "renderer": {
-          "config": "./webpack.renderer.config.js",
-          "nodeIntegration": true,
-          "entryPoints": [
+        mainConfig: './webpack.main.config.js',
+        renderer: {
+          config: './webpack.renderer.config.js',
+          nodeIntegration: true,
+          entryPoints: [
             {
-              "html": "./src/index.html",
-              "js": "./src/renderer.js",
-              "name": "main_window"
-            }
-          ]
+              html: './src/index.html',
+              js: './src/renderer.js',
+              name: 'main_window',
+            },
+          ],
         },
         // https://webpack.js.org/configuration/dev-server/
-        "devServer": {
+        devServer: {
           //"stats": "verbose"
-        }
-      }
-    ]
-  ]
+        },
+      },
+    ],
+  ],
 };

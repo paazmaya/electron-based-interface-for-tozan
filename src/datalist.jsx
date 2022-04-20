@@ -1,16 +1,13 @@
 import { remote } from 'electron';
 
 import React from 'react';
-import {
-  Button
-} from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react';
 
-import { Table, Thead, Tbody, Tr, Th, Td, chakra } from '@chakra-ui/react'
-import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons'
-import { useTable, useSortBy } from 'react-table'
+import { Table, Thead, Tbody, Tr, Th, Td, chakra } from '@chakra-ui/react';
+import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons';
+import { useTable, useSortBy } from 'react-table';
 
-export default function DataList({data = []}) {
-  
+export default function DataList({ data = [] }) {
   const columns = React.useMemo(
     () => [
       {
@@ -28,7 +25,7 @@ export default function DataList({data = []}) {
       },
       {
         Header: 'Last modified',
-        accessor: 'modified'
+        accessor: 'modified',
       },
       {
         Header: 'Duplicates',
@@ -36,11 +33,11 @@ export default function DataList({data = []}) {
         isNumeric: true,
       },
     ],
-    [],
-  )
+    []
+  );
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data }, useSortBy)
+    useTable({ columns, data }, useSortBy);
 
   return (
     <Table {...getTableProps()}>
@@ -53,12 +50,12 @@ export default function DataList({data = []}) {
                 isNumeric={column.isNumeric}
               >
                 {column.render('Header')}
-                <chakra.span pl='4'>
+                <chakra.span pl="4">
                   {column.isSorted ? (
                     column.isSortedDesc ? (
-                      <TriangleDownIcon aria-label='sorted descending' />
+                      <TriangleDownIcon aria-label="sorted descending" />
                     ) : (
-                      <TriangleUpIcon aria-label='sorted ascending' />
+                      <TriangleUpIcon aria-label="sorted ascending" />
                     )
                   ) : null}
                 </chakra.span>
@@ -69,7 +66,7 @@ export default function DataList({data = []}) {
       </Thead>
       <Tbody {...getTableBodyProps()}>
         {rows.map((row) => {
-          prepareRow(row)
+          prepareRow(row);
           return (
             <Tr {...row.getRowProps()}>
               {row.cells.map((cell) => (
@@ -78,9 +75,9 @@ export default function DataList({data = []}) {
                 </Td>
               ))}
             </Tr>
-          )
+          );
         })}
       </Tbody>
     </Table>
-  )
+  );
 }

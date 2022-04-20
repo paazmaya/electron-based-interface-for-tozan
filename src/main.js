@@ -16,8 +16,8 @@ const createWindow = () => {
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
       nodeIntegration: true,
-      contextIsolation: false
-    }
+      contextIsolation: false,
+    },
   });
 
   // and load the index.html of the app.
@@ -58,15 +58,17 @@ const chooseDirectory = () => {
     title: 'Select SQLite file',
     filter: {
       name: 'SQLite files',
-      extensions: ['sqlite']
+      extensions: ['sqlite'],
     },
-    properties: ['openFile']
+    properties: ['openFile'],
   });
   console.log(directory);
 };
 
 const randomHash = () => {
-  const hash = Math.random().toString(16).substring(2) + Math.random().toString(16).substring(2);
+  const hash =
+    Math.random().toString(16).substring(2) +
+    Math.random().toString(16).substring(2);
   return hash;
 };
 
@@ -75,11 +77,11 @@ const sendRandom300rows = () => {
   const list = [];
   for (let i = 0; i < 300; i++) {
     list.push({
-      filepath: `file-${i}-${Math.floor(Math.random() * 10000)}.txt`, 
+      filepath: `file-${i}-${Math.floor(Math.random() * 10000)}.txt`,
       hash: randomHash(),
       filesize: Math.round(Math.random() * 10000, 2),
-      modified: (new Date()).toISOString(), 
-      count: Math.floor(Math.random() * 10 + 1)
+      modified: new Date().toISOString(),
+      count: Math.floor(Math.random() * 10 + 1),
     });
   }
   mainWindow.webContents.send('rows', list);
@@ -87,13 +89,14 @@ const sendRandom300rows = () => {
 
 const template = [
   // { role: 'appMenu' }
-  ...(isMac ? [{
-    label: app.getName(),
-    submenu: [
-      { role: 'about' },
-      { role: 'quit' }
-    ]
-  }] : []),
+  ...(isMac
+    ? [
+        {
+          label: app.getName(),
+          submenu: [{ role: 'about' }, { role: 'quit' }],
+        },
+      ]
+    : []),
   // { role: 'fileMenu' }
   {
     label: 'File',
@@ -102,16 +105,16 @@ const template = [
         label: 'Open database',
         click: () => {
           chooseDirectory();
-        }
+        },
       },
       {
         label: 'Generate random 300 rows',
         click: () => {
           sendRandom300rows();
-        }
+        },
       },
-      isMac ? { role: 'close' } : { role: 'quit' }
-    ]
+      isMac ? { role: 'close' } : { role: 'quit' },
+    ],
   },
   {
     role: 'help',
@@ -120,11 +123,11 @@ const template = [
         label: 'Learn More',
         click: () => {
           shell.openExternalSync('https://github.com/paazmaya/tozan');
-        }
-      }
-    ]
-  }
-]
+        },
+      },
+    ],
+  },
+];
 
 const menu = Menu.buildFromTemplate(template);
 Menu.setApplicationMenu(menu);

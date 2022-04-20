@@ -1,4 +1,3 @@
-
 import Better3 from 'better-sqlite3';
 
 const SELECT_DUPLICATES = `
@@ -13,7 +12,6 @@ HAVING
 ORDER BY
   hash, filepath;
 `;
-
 
 const loadSqLIte = (dbPath) => {
   const db = new Better3(dbPath);
