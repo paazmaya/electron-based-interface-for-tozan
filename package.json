@@ -9,7 +9,7 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "electron-forge lint",
+    "lint": "eslint .",
     "prettier": "prettier --ignore-path .gitignore --write ."
   },
   "keywords": [
@@ -45,6 +45,8 @@
     "babel-loader": "8.2.5",
     "css-loader": "6.0.0",
     "electron": "18.0.4",
+    "eslint": "8.13.0",
+    "eslint-plugin-import": "2.26.0",
     "framer-motion": "6.3.0",
     "node-loader": "2.0.0",
     "prettier": "^2.6.2",
