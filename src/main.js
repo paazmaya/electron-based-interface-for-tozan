@@ -1,4 +1,5 @@
 const { app, BrowserWindow, dialog, Menu, shell } = require('electron');
+const { generateRandomRows, readDuplicates } = require('./database');
 
 const isMac = process.platform === 'darwin';
 
@@ -63,27 +64,16 @@ const chooseDirectory = () => {
     properties: ['openFile'],
   });
   console.log(directory);
-};
-
-const randomHash = () => {
-  const hash =
-    Math.random().toString(16).substring(2) +
-    Math.random().toString(16).substring(2);
-  return hash;
+  const first = directory[0];
+  if (first) {
+    const list = readDuplicates(first);
+    mainWindow.webContents.send('rows', list);
+  }
 };
 
 const sendRandom300rows = () => {
   const mainWindow = BrowserWindow.getFocusedWindow();
-  const list = [];
-  for (let i = 0; i < 300; i++) {
-    list.push({
-      filepath: `file-${i}-${Math.floor(Math.random() * 10000)}.txt`,
-      hash: randomHash(),
-      filesize: Math.round(Math.random() * 10000, 2),
-      modified: new Date().toISOString(),
-      count: Math.floor(Math.random() * 10 + 1),
-    });
-  }
+  const list = generateRandomRows(300);
   mainWindow.webContents.send('rows', list);
 };
 
