@@ -17,6 +17,7 @@ function Complete() {
   return (
     <AppContainer>
       <ChakraProvider>
+        <h1>tozan - File hash table of duplicates</h1>
         <DataList data={data} />
       </ChakraProvider>
     </AppContainer>

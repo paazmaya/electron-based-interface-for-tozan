@@ -10,15 +10,21 @@
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "eslint .",
+    "pretest": "npm run package",
+    "test": "playwright test",
     "prettier": "prettier --ignore-path .gitignore --write ."
   },
   "keywords": [
+    "duplicates",
+    "electron",
+    "playwright",
     "tozan",
-    "duplicates"
+    "webpack"
   ],
   "author": {
     "name": "Juga Paazmaya",
-    "email": "paazmaya@yahoo.com"
+    "email": "paazmaya@yahoo.com",
+    "url": "https://paazmaya.fi"
   },
   "engines": {
     "node": ">=16.13.0",
@@ -41,10 +47,12 @@
     "@electron-forge/plugin-webpack": "6.0.0-beta.63",
     "@emotion/react": "11.9.0",
     "@emotion/styled": "11.8.1",
+    "@playwright/test": "^1.21.1",
     "@vercel/webpack-asset-relocator-loader": "1.7.2",
     "babel-loader": "8.2.5",
     "css-loader": "6.7.1",
     "electron": "18.2.0",
+    "electron-playwright-helpers": "^1.1.1",
     "eslint": "8.14.0",
     "eslint-plugin-import": "2.26.0",
     "framer-motion": "6.3.3",
