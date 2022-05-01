@@ -11,12 +11,12 @@ export default function DataList({ data = [] }) {
   const columns = React.useMemo(
     () => [
       {
-        Header: 'Filepath',
-        accessor: 'filepath',
+        Header: 'Hash',
+        accessor: 'hash',
       },
       {
-        Header: 'SHA256',
-        accessor: 'hash',
+        Header: 'Filepath',
+        accessor: 'filepath',
       },
       {
         Header: 'Size (bytes)',

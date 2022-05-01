@@ -2,7 +2,7 @@ import Better3 from 'better-sqlite3';
 
 const SELECT_DUPLICATES = `
 SELECT
-  filepath, hash, filesize, modified, COUNT(hash) as count
+  hash, filepath, filesize, modified, COUNT(hash) as count
 FROM
   files
 GROUP BY
