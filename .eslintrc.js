@@ -14,7 +14,7 @@ module.exports = {
     'plugin:import/electron',
   ],
   parserOptions: {
-    ecmaVersion: 2018,
+    ecmaVersion: 'latest',
     ecmaFeatures: {
       jsx: true,
     },
