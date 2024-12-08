@@ -27,8 +27,8 @@
     "url": "https://paazmaya.fi"
   },
   "engines": {
-    "node": ">=16.13.0",
-    "npm": ">=8.1.0"
+    "node": ">=22.11.0",
+    "npm": ">=10.9.0"
   },
   "license": "MIT",
   "config": {
